@@ -25,7 +25,7 @@ Just execute jar and type localhost:8080 and service is ready to send emails.
 
 FrontPage of this service has four test box to add details.
 
-![](~/Desktop/FailoverEmailService.png)
+![Screenshot](https://github.com/Bhalchandra-B/FailoverEmailService/blob/master/FailoverEmailService.png)
 
 There are some constraints with recipients and sender email address for *MailGun* and *SendGrid*.
 
