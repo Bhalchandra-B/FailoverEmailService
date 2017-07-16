@@ -3,7 +3,7 @@ package org.smacc.smaccit.exception;
 /**
  * This class is exception class for handling exceptions
  * 
- * @author Bhalchandra
+ * @author Bhalchandra Bingewar (brbingewar@gmail.com)
  *
  */
 @SuppressWarnings("serial")

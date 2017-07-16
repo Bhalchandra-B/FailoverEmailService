@@ -11,7 +11,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
  * 
  * Configuration are mentioned in resource/email.properties
  * 
- * @author Bhalchandra
+ * @author Bhalchandra Bingewar (brbingewar@gmail.com)
  *
  */
 @Configuration

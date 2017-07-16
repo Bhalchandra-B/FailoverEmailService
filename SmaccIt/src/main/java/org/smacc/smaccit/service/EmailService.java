@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
  * This is interface for . It prepares email as perinput given by front end and
  * send.
  * 
- * @author Bhalchandra
+ * @author Bhalchandra Bingewar (brbingewar@gmail.com)
  *
  */
 @Service
@@ -23,7 +23,7 @@ public interface EmailService {
 	 *            -
 	 * @throws Exception
 	 */
-	public void sendMails(EmailModel emailModel) throws Exception;
+	public boolean sendMails(EmailModel emailModel) throws Exception;
 
 	/**
 	 * This method prepares email model object based on the input given by front
@@ -34,5 +34,5 @@ public interface EmailService {
 	 * @return
 	 * @throws EmailException
 	 */
-	public MimeMessage createMimeMessage(EmailModel emailmodel, MimeMessage message) throws EmailException;
+	public MimeMessage createEmail(EmailModel emailmodel, MimeMessage message) throws EmailException;
 }

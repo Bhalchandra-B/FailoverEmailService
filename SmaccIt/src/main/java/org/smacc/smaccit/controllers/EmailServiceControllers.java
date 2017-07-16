@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Controller class to get access API for sendng mails. 'Thymeleaf' template
  * engine has been used to render the front end.
  * 
- * @author Bhalchandra
+ * @author Bhalchandra Bingewar (brbingewar@gmail.com)
  *
  */
 @Controller
@@ -43,7 +43,9 @@ public class EmailServiceControllers {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.POST, produces = "application/json")
 	public String sendMail(@ModelAttribute EmailModel emailModel) throws Exception {
-		emailService.sendMails(emailModel);
-		return "result";
+		if (emailService.sendMails(emailModel))
+			return "success";
+		else
+			return "failure";
 	}
 }

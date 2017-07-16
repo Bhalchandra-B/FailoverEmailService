@@ -1,9 +1,8 @@
 package org.smacc.smaccit.service.impl;
 
-import java.util.regex.Pattern;
-
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
@@ -19,19 +18,16 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 
 /**
- * This is concrete implementation of EmailService interface. It prepares email
- * as perinput given by front end and send.
+ * This is concrete implementation of EmailService interface. It prepares and
+ * send email message as per input given by front end.
  * 
- * @author Bhalchandra
+ * @author Bhalchandra Bingewar (brbingewar@gmail.com)
  *
  */
 @Service
 public class EmailServiceImpl implements EmailService {
 
 	private static final Logger LOG = LoggerFactory.getLogger(EmailServiceImpl.class);
-	public static final Pattern VALID_EMAIL_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
-			Pattern.CASE_INSENSITIVE);
-
 	private boolean isEmailSent = false;
 
 	@Autowired
@@ -41,44 +37,67 @@ public class EmailServiceImpl implements EmailService {
 	private JavaMailSender sendgridService;
 
 	@Override
-	public void sendMails(EmailModel emailmodel) throws EmailException {
+	public boolean sendMails(EmailModel emailmodel) throws EmailException {
 
 		MimeMessage message = mailgunService.createMimeMessage();
-		createMimeMessage(emailmodel, message);
-		try {
-			mailgunService.send(message);
-			// isEmailSent = true;
-			LOG.info("Email sent via MailGun");
-		} catch (MailException e) {
-			LOG.debug("Unable to send email using MailGun service" + e.getMessage());
-			e.printStackTrace();
-		}
-
-		if (!isEmailSent) {
+		message = createEmail(emailmodel, message);
+		if (message != null) {
 			try {
-				sendgridService.send(message);
-				isEmailSent = true;
-				LOG.info("Email sent via SendGrid");
+				mailgunService.send(message);
+				// isEmailSent = true;
+				LOG.info("Email sent via MailGun");
+				return true;
 			} catch (MailException e) {
-				LOG.debug("Unable to send email using SendGrid service" + e.getMessage());
-				e.printStackTrace();
-				throw new EmailException("Unable to send email...");
+				LOG.info("Unable to send email using MailGun service. Recepints address is not found in mailing list"
+						+ e.getMessage());
 			}
+
+			if (!isEmailSent) {
+				try {
+					sendgridService.send(message);
+					isEmailSent = true;
+					LOG.info("Email sent via SendGrid");
+					return true;
+				} catch (MailException e) {
+					LOG.info("Unable to send email using SendGrid service" + e.getMessage());
+					throw new EmailException("Unable to send email...");
+				}
+			}
+		} else {
+			LOG.debug("Message failed to send");
 		}
+		return false;
 	}
 
 	@Override
-	public MimeMessage createMimeMessage(EmailModel emailmodel, MimeMessage message) throws EmailException {
-		try {
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(emailmodel.getSendTo()));
-			message.setText(emailmodel.getEmailBody());
-			message.setSubject(emailmodel.getSubject());
-			message.setFrom(emailmodel.getFrom());
-			LOG.info("Email header and content are inserted");
-			return message;
-		} catch (MessagingException e) {
-			LOG.debug("Unable to set details of message " + e.getMessage());
-			throw new EmailException("Unable to set message details");
+	public MimeMessage createEmail(EmailModel emailmodel, MimeMessage message) throws EmailException {
+
+		if (isValidEmailAddress(emailmodel.getSendTo()) && isValidEmailAddress(emailmodel.getFrom())) {
+			try {
+				message.addRecipient(Message.RecipientType.TO, new InternetAddress(emailmodel.getSendTo()));
+				message.setText(emailmodel.getEmailBody());
+				message.setSubject(emailmodel.getSubject());
+				message.setFrom(emailmodel.getFrom());
+				LOG.info("Email header and content are inserted");
+				return message;
+			} catch (MessagingException e) {
+				LOG.info("Unable to set details of message " + e.getMessage());
+				throw new EmailException("Unable to set message details");
+			}
+		} else {
+			LOG.info("Email address are not in format");
+			return null;
 		}
+	}
+
+	public static boolean isValidEmailAddress(String email) {
+		boolean result = true;
+		try {
+			InternetAddress emailAddr = new InternetAddress(email);
+			emailAddr.validate();
+		} catch (AddressException ex) {
+			result = false;
+		}
+		return result;
 	}
 }

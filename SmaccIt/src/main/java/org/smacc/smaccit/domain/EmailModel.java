@@ -2,22 +2,18 @@ package org.smacc.smaccit.domain;
 
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.Email;
-
 /**
  * This is model class for Email Entity
  * 
- * @author Bhalchandra
+ * @author Bhalchandra Bingewar (brbingewar@gmail.com)
  *
  */
 public class EmailModel {
 
 	@NotNull
-	@Email
 	private String sendTo;
 
 	@NotNull
-	@Email
 	private String from;
 
 	private String emailBody;
