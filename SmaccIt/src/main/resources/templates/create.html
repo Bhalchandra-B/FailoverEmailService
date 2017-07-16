@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>SmaccIt Email Client</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Email Client</h1>
+	<form action="#" th:action="@{/}" th:object="${create}" method="post">
+		<p>SendTo: <input type="text" th:field="*{sendTo}"/></p>
+		<p>From: <input type="text" th:field="*{from}"/></p>
+		<p>Subject: <input type="text" th:field="*{subject}"/></p>
+		<p>Message: <input type="text" th:field="*{emailBody}"/></p>
+		<p><input type="submit" value="Send"/> <input type="reset" value="Reset" /></p>
+	</form>
+</body>	
+</html>
