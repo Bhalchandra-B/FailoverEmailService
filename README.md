@@ -35,10 +35,10 @@ There are some constraints with recipients and sender email address for *MailGun
 
 For experiment purpose, only one user has been added, **scotttiger000@gmail.com**.
 
-**SendTo** : scotttiger000@gmail.com
+**SendTo** : scotttiger000@gmail.com<br/>
 **From** : *DMARC policy* is restricting to use some email address as sender from few domain, for example *yahoo.com*.
 
-So, to send message successfully with *mailgun* , there are two options.
+So, to send message successfully with *mailgun*, there are two options.
 
 1. Leave blank.
 2. use email address with *gmail.com* domain.
@@ -58,7 +58,7 @@ Conclusion:
 **SendTo** : for *mailgun*, **scotttiger000@gmail.com**, for *sendgrid* any address from *gmail* domain<br/>
 **From** : for *mailgun*, blank or any other email address from *gmail* domain, for *sendgrid*, email address from *gmail* domain.
 
-Ex:
+Ex:<br/>
 **SendTo** : scotttiger000@gmail.com<br/>
 **From** : abcd@gmail.com or xyz@gmail.com
 
