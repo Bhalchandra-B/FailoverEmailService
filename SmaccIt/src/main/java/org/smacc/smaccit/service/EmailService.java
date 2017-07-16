@@ -35,5 +35,4 @@ public interface EmailService {
 	 * @throws EmailException
 	 */
 	public MimeMessage createMimeMessage(EmailModel emailmodel, MimeMessage message) throws EmailException;
-
 }
