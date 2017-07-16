@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>SmaccIt Email Client Result</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Email sent</h1>
+    <p th:text="'SendTo: ' + ${emailModel.sendTo}" />
+    <p th:text="'From: ' + ${emailModel.from}" />
+    <p th:text="'Subject: ' + ${emailModel.subject}" />
+    <p th:text="'Content: ' + ${emailModel.emailBody}" />
+    <a href="/">Send new email</a>
+</body>
+</html>
