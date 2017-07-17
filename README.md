@@ -9,9 +9,16 @@ Currently, this service providing with 2 email service providers
 1.[MailGun](www.mailgun.com)<br/>
 2.[SendGrid](www.sendgrid.com)
 
-# dependencies
+# dependencies / Technology stack
+I chose backend track so, minimal frontend code is written.</br>
 
-This is Maven-SpringBoot project works with [thymeleaf](http://www.thymeleaf.org/) template engine for rendering front end.
+This is Maven-SpringBoot project works with [thymeleaf](http://www.thymeleaf.org/) template engine for rendering front end.<br/>
+
+# Experience with technology stack
+
+springboot and maven - since i'm in current job for more than 1 year </br>
+thymeleaf templte engine and email service provider like MailGun - this is first time </br>
+working with Java for more than 2 years all together.</br>
 
 No backend is used because it does not store anything.
 
@@ -19,7 +26,7 @@ No backend is used because it does not store anything.
 
 It has only one endpoint, that is root(/).
 
-Just execute jar and type localhost:8080 and service is ready to send emails.
+just type localhost:8080 and service is ready to send emails.
 
 # Constraints of email service providers.
 
@@ -53,7 +60,7 @@ Email address of sender can not be blank. It MUST be provided.<br/>
 Keeping Blank *From*, blocks the email from sending.
 
 
-Conclusion:
+Conclusion for sending mails:
 
 **SendTo** : for *mailgun*, **scotttiger000@gmail.com**, for *sendgrid* any address from *gmail* domain<br/>
 **From** : for *mailgun*, blank or any other email address from *gmail* domain, for *sendgrid*, email address from *gmail* domain.
@@ -63,4 +70,7 @@ Ex:<br/>
 **From** : abcd@gmail.com or xyz@gmail.com
 
 
-
+# Confessions
+1. Unable to write unit tests and integration tests. It's quite complicated.
+2. In integration test, i failed to manage, to populate the EmailModel object. Because no JSON/XML files are being used.
+3. In Unit tests, 'GreenMail' is best choice to test SMTP email code, but it needs same port to accumulate first though which email is going to be sent. In this case, first app is starting port 'xxx' and then 'GreenMail' on same port. That causes, IncosistentStateException.
