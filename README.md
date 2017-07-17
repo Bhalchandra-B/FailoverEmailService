@@ -70,8 +70,13 @@ Ex:<br/>
 **SendTo** : scotttiger000@gmail.com<br/>
 **From** : abcd@gmail.com or xyz@gmail.com
 
+# Dockerization
+Image is dockerized.<br/>
+
+docker run -p 8080:8080 smaccit
 
 # Confessions
 1. Unable to write unit tests and integration tests. It's quite complicated.
 2. In integration test, i failed to manage, to populate the EmailModel object. Because no JSON/XML files are being used.
 3. In Unit tests, 'GreenMail' is best choice to test SMTP email code, but it needs same port to accumulate first though which email is going to be sent. In this case, first app is starting port 'xxx' and then 'GreenMail' on same port. That causes, IncosistentStateException.
+
