@@ -44,7 +44,7 @@ public class EmailServiceImpl implements EmailService {
 		if (message != null) {
 			try {
 				mailgunService.send(message);
-				// isEmailSent = true;
+				isEmailSent = true;
 				LOG.info("Email sent via MailGun");
 				return true;
 			} catch (MailException e) {
