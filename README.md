@@ -59,6 +59,7 @@ It works flawlessly with *gmail* domain but mail to *yahoo* are being deferred b
 Email address of sender can not be blank. It MUST be provided.<br/>
 Keeping Blank *From*, blocks the email from sending.
 
+You can add more recipients in *MailGun* and sender in *SendGrid* account, after i provide credentials through mail.
 
 Conclusion for sending mails:
 
