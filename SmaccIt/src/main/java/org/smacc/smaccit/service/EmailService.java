@@ -20,19 +20,18 @@ public interface EmailService {
 	 * This method sends email though selected email service provider
 	 * 
 	 * @param emailModel
-	 *            -
+	 * @return boolean whether email is sent ot not
 	 * @throws Exception
 	 */
 	public boolean sendMails(EmailModel emailModel) throws Exception;
 
 	/**
-	 * This method prepares email model object based on the input given by front
-	 * end
+	 * This method prepares MimeMessage based on the input given by front end
 	 * 
 	 * @param emailmodel
-	 * @param message
-	 * @return
+	 * @param mimeMessage
+	 * @return MimeMessage
 	 * @throws EmailException
 	 */
-	public MimeMessage createEmail(EmailModel emailmodel, MimeMessage message) throws EmailException;
+	public MimeMessage createEmail(EmailModel emailmodel, MimeMessage mimeMessage) throws EmailException;
 }
